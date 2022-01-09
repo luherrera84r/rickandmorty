@@ -1,4 +1,4 @@
-# Informacion del Proyecto
+# Información del Proyecto
 Nombre: Rick And Morty
 
 Tipo: Desafío

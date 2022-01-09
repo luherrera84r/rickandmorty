@@ -32,10 +32,6 @@ public class CharacterController {
         //convert object to DTO
         CharacterMapper characterMapper = new CharacterMapper();
 
-        if(null != characterModel){
-            return ResponseEntity.ok(characterMapper.fromEntity(characterModel));
-        }
-
         return ResponseEntity.notFound().build();
     }
 }
