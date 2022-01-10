@@ -27,13 +27,13 @@ public class ApiCharacterService implements CharacterGateway {
     public CharacterDTO getCharacter(Integer id) {
 
         CharacterModel character = cRequest.getCharacterObject(id);
+        logger.info("Answer Character object value: " + character.toString());
 
         if(null != character && null!=character.getOrigin().getUrl() && !character.getOrigin().getUrl().isEmpty()){
             LocationModel location = lRequest.getLocationObject(character.getOrigin().getUrl());
 
-            logger.info("Answer Character object value: " + character.toString());
             logger.info("Answer Location object value: " +location.toString());
-            character.setLocation(location);
+            character.setOrigin(location);
         }
 
         if(Objects.isNull(character)) {

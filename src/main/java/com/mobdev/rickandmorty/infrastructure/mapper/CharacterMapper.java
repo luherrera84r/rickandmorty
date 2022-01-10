@@ -17,7 +17,7 @@ public class CharacterMapper implements Mapper<CharacterDTO, CharacterModel>{
         dto.setType(entity.getType());
         dto.setEpisodeCount(entity.getEpisode().length);
 
-        dto.setOrigin(new LocationMapper().fromEntity(entity.getLocation()));
+        dto.setOrigin(new LocationMapper().fromEntity(entity.getOrigin()));
 
         return dto;
     }
