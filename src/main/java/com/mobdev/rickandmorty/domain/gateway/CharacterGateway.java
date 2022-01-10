@@ -1,8 +1,8 @@
 package com.mobdev.rickandmorty.domain.gateway;
 
-import com.mobdev.rickandmorty.domain.model.CharacterModel;
+import com.mobdev.rickandmorty.infrastructure.dto.CharacterDTO;
 
 public interface CharacterGateway {
 
-    CharacterModel getCharacter(Integer id);
+    CharacterDTO getCharacter(Integer id);
 }

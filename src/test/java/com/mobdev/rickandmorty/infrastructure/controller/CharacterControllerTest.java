@@ -1,7 +1,7 @@
 package com.mobdev.rickandmorty.infrastructure.controller;
 
 import com.mobdev.rickandmorty.domain.model.CharacterModel;
-import com.mobdev.rickandmorty.infrastructure.mapper.CharacterMapper;
+import com.mobdev.rickandmorty.infrastructure.dto.CharacterDTO;
 import com.mobdev.rickandmorty.infrastructure.util.GeneratorObjectUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,15 +32,21 @@ public class CharacterControllerTest {
 
         character = GeneratorObjectUtil.getNewObjectCharacterTest();
 
+        CharacterDTO dto = new CharacterDTO();
+        dto.setId(character.getId());
+        dto.setName(character.getName());
+        dto.setStatus(character.getStatus());
+        dto.setSpecies(character.getSpecies());
+        dto.setType(character.getType());
+        dto.setEpisodeCount(character.getEpisode().length);
+
+        when(characterController.getCharacter(1)).thenReturn(ResponseEntity.ok(dto));
+
     }
 
     @Test
     void getCharacter() throws Exception {
 
-        CharacterMapper characterMapper = new CharacterMapper();
-
-        when(characterController.getCharacter(1))
-                .thenReturn(ResponseEntity.ok(characterMapper.fromEntity(character)));
 
         mvc.perform(MockMvcRequestBuilders.get("/api/character/1"))
                 .andDo(print())

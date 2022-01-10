@@ -5,6 +5,7 @@ import com.mobdev.rickandmorty.domain.gateway.CharacterGateway;
 import com.mobdev.rickandmorty.infrastructure.adapter.*;
 import com.mobdev.rickandmorty.infrastructure.adapter.gateway.CharacterRequestRest;
 import com.mobdev.rickandmorty.infrastructure.adapter.gateway.LocationRequestRest;
+import com.mobdev.rickandmorty.infrastructure.mapper.CharacterMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -29,11 +30,12 @@ public class RickandmortyConfig {
 
     @Bean
     public LocationRequestRest locationRequestRest(RestTemplate restTemplate){
-        return new LocationRequestRestImpl(restTemplate());
+        return new LocationRequestRestImpl(restTemplate);
     }
 
     @Bean
-    public CharacterGateway characterService(CharacterRequestRest cRequest, LocationRequestRest lRequest){
-        return new ApiCharacterService(cRequest, lRequest);
+    public CharacterGateway characterService(CharacterRequestRest cRequest, LocationRequestRest lRequest,
+                                             CharacterMapper characterMapper){
+        return new ApiCharacterService(cRequest, lRequest, characterMapper);
     }
 }

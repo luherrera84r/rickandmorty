@@ -27,10 +27,6 @@ public class CharacterController {
     ResponseEntity<CharacterDTO> getCharacter(@PathVariable("id") Integer id){
 
         logger.info("initialize api rest Ricky and Morty - Challenge");
-        CharacterModel characterModel = characterUseCase.getCharacter(id);
-
-        //convert object to DTO
-        CharacterMapper characterMapper = new CharacterMapper();
-        return ResponseEntity.ok(characterMapper.fromEntity(characterModel));
+        return ResponseEntity.ok(characterUseCase.getCharacter(id));
     }
 }

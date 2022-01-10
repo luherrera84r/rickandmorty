@@ -2,7 +2,9 @@ package com.mobdev.rickandmorty.infrastructure.mapper;
 
 import com.mobdev.rickandmorty.domain.model.CharacterModel;
 import com.mobdev.rickandmorty.infrastructure.dto.CharacterDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CharacterMapper implements Mapper<CharacterDTO, CharacterModel>{
     @Override
     public CharacterDTO fromEntity(CharacterModel entity) {

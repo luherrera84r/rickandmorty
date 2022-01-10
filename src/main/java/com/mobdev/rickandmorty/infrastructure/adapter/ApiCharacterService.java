@@ -4,24 +4,28 @@ import com.mobdev.rickandmorty.application.error.CharacterNotFoundException;
 import com.mobdev.rickandmorty.domain.gateway.CharacterGateway;
 import com.mobdev.rickandmorty.domain.model.CharacterModel;
 import com.mobdev.rickandmorty.domain.model.LocationModel;
+import com.mobdev.rickandmorty.infrastructure.dto.CharacterDTO;
 import com.mobdev.rickandmorty.infrastructure.adapter.gateway.CharacterRequestRest;
 import com.mobdev.rickandmorty.infrastructure.adapter.gateway.LocationRequestRest;
+import com.mobdev.rickandmorty.infrastructure.mapper.CharacterMapper;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
 
 @RequiredArgsConstructor
 public class ApiCharacterService implements CharacterGateway {
 
-    private static final Logger logger = LoggerFactory.getLogger(ApiCharacterService.class);
-
     private final CharacterRequestRest cRequest;
     private final LocationRequestRest lRequest;
+    private final CharacterMapper characterMapper;
+
+    private static final Logger logger = LoggerFactory.getLogger(ApiCharacterService.class);
 
     @Override
-    public CharacterModel getCharacter(Integer id) {
+    public CharacterDTO getCharacter(Integer id) {
 
         CharacterModel character = cRequest.getCharacterObject(id);
 
@@ -37,6 +41,6 @@ public class ApiCharacterService implements CharacterGateway {
             throw new CharacterNotFoundException();
         }
 
-        return character;
+        return characterMapper.fromEntity(character);
     }
 }
